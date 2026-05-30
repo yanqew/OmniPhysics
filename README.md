@@ -15,4 +15,4 @@
 2. Склонируйте репозиторий или скачайте файл проекта.
 3. Запустите скрипт через терминал:
 ```bash
-python src/physics_calculater.py
+python src/main.py
