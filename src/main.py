@@ -25,9 +25,9 @@ def main():
         print("   ГЛАВНОЕ МЕНЮ ПОМОЩНИКА")
         print("="*30)
         print("1. Механика")
-        print("2. Термодинамика (В разработке)")
+        print("2. Термодинамика")
         print("3. Электродинамика и Магнетизм")
-        print("4. Свет и Звук (В разработке)")
+        print("4. Свет и Звук")
         print("0. Выход из программы")
         
         choice1 = input('\nВыберите тему: ').strip()
@@ -50,6 +50,7 @@ def main():
             if choice == '0':
                 continue
                 
+
             if choice == '1':
                 m = safe_float_input('\nВведите массу (кг): ')
                 f98 = formulas.calculate_gravity_force(m, g=9.8)
@@ -82,6 +83,37 @@ def main():
                     message_template="\n Потенциальная энергия: {} Дж\n Кинетическая энергия: {} Дж\n Полная энергия: {} Дж"
                 )
 
+
+        elif choice1 == '2':
+            print("\n--- РАЗДЕЛ: Термодинамика ---")
+            print("1. Расчет выделение тепла (Q)")
+            print("2. Количество теплоты при сгорании топлива")
+            print("3. Количество теплоты при плавлении (или кристаллизации)")
+            print("4. Количество теплоты при парообразовании (кипении)")
+            print("0. Назад")
+            choice = input("\nВыберите пункт меню: ").strip()
+            if choice == '0':
+                continue
+            elif choice == '1':
+                execute_calculation(
+                    prompts=['Введите удельную теплоемкость: ', 'Массу тела: ', 'Начальная температура (если неизвестно - 0): ', 'Конечная температура(t2): '],
+                    formula_func=formulas.calculate_heating_heat,
+                    message_template="\n Количество теплоты: {} Дж"
+                )
+            elif choice == '2':
+                execute_calculation(
+                    prompts=['Введите удельную теплоту сгорание: ', 'Массу тела: '],
+                    formula_func=formulas.calculate_fuel_combustion,
+                    message_template="\n Количество теплоты при сгорание: {} Дж"
+                )
+            elif choice == '3':
+                execute_calculation(
+                    prompts=['Введите удельную теплоту плавление: ', 'Массу тела: '],
+                    formula_func=formulas.calculate_melting_heat,
+                    message_template="\n Количество теплоты при плавление или кристализации: {} Дж"
+                )
+
+
         elif choice1 == '3':
             print("\n--- РАЗДЕЛ: ЭЛЕКТРОДИНАМИКА ---")
             print("1. Расчет сопротивления проводника")
@@ -90,7 +122,6 @@ def main():
             print("4. Мощность и работа тока")
             print("5. Выделение тепла тока (Закон Джоуля-Ленца)")
             print("0. Назад")
-
             choice = input("\nВыберите пункт меню: ").strip()
 
             if choice == '0':
@@ -158,11 +189,27 @@ def main():
                     message_template="\n Выделенное количество теплоты: {} Дж ({} кДж)"
                 )
         
-        elif choice1 in ['2', '4']:
-            print("\n" + "."*30)
-            print("Этот раздел сейчас находится в разработке.")
-            print("."*30)
-            input('\n[ Нажмите ENTER, чтобы вернуться ]')
+
+        elif choice1 == '4':
+            print("\n--- РАЗДЕЛ: Свет и Звук ---")
+            print("1. Расчет длины волны (и для звука, и для света)")
+            print("2. Оптическая сила линзы (Оптика)")
+            print("0. Назад")
+            choice = input("\nВыберите пункт меню: ").strip()
+            if choice == '0':
+                continue
+            elif choice == '1':
+                execute_calculation(
+                    prompts=['Введите скорость волны: ', 'Частота: '],
+                    formula_func=formulas.calculate_wave_length,
+                    message_template="\n Длина волны: {} М"
+                )
+            elif choice == '2':
+                execute_calculation(
+                    prompts=['Введите фокусное расстояние: '],
+                    formula_func=formulas.calculate_lens_power,
+                    message_template="\n Оптическая сила: {} Диоптрии"
+                )
 
 if __name__ == '__main__':
     main()
