@@ -22,6 +22,27 @@ def calculate_mechanical_energies(mass: float, height: float, speed: float) -> t
     e_full = e_pot + e_kin
     return round(e_pot, 2), round(e_kin, 2), round(e_full, 2)
 
+# 2. Термодинамика
+def calculate_heating_heat(c: float, mass: float, t1: float, t2: float) -> float:
+    delta_t = t2 - t1
+    return round(c * mass * delta_t, 2)
+
+def calculate_fuel_combustion(q: float, mass: float) -> float:
+    return round(q * mass, 2)
+
+def calculate_melting_heat(lambda_param: float, mass: float) -> float:
+    return round(lambda_param * mass, 2)
+
+# 5. Свет и звук
+def calculate_wave_length(speed: float, frequency: float) -> float:
+    if frequency == 0:
+        raise ValueError("Частота не может быть равна нулю.")
+    return round(speed / frequency, 2)
+
+def calculate_lens_power(focal_length: float) -> float:
+    if focal_length == 0:
+        raise ValueError("Фокусное расстояние не может быть равно нулю.")
+    return round(1 / focal_length, 2)
 
 # 3. Электродинамика
 def calculate_resistance_geometry(length: float, area: float, resistivity: float) -> float:
@@ -58,5 +79,7 @@ def calculate_power_and_work(voltage: float, current: float, time: float) -> tup
     work_kj = round(work_j / 1000, 2)
     return power, work_j, work_kj
 
-def calculate_joule_heat(current: float, resistance: float, time: float) -> float:
-    return round((current ** 2) * resistance * time, 2)
+def calculate_joule_heat(current: float, resistance: float, time: float) -> tuple[float, float]:
+    heat_j = round((current ** 2) * resistance * time, 2)
+    heat_kj = round(heat_j / 1000, 2)
+    return heat_j, heat_kj
